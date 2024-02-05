@@ -1,0 +1,21 @@
+
+
+
+       SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=restaurantdb;Integrated Security=True");
+            con.Open();
+            string username = txtUsername.Text;
+            string password = txtPassword.Text;
+            SqlCommand cmd = new SqlCommand("select Username,Password from logintab where Username='" + txtUsername.Text + "'and Password='" + txtPassword.Text + "'", con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                Main mn = new Main();
+                mn.Show();
+            }
+            else
+            {
+                MessageBox.Show("Invalid username or password");
+            }
+            con.Close();
